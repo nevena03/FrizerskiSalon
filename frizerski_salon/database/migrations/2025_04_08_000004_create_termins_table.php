@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->date('datum');
             $table->time('vreme');
-            $table->enum('status');
+            $table->enum('status',['potvrdjen','nepotvrdjen','otkazan','zavrsen','propusten'])->default('nepotvrdjen');
             $table->unsignedBigInteger('frizer_id');
             $table->unsignedBigInteger('klijent_id');
 

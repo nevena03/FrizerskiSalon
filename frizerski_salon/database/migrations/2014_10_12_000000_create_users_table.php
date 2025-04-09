@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('username')->unique();
             $table->string('password');
             $table->string('broj_telefona')->unique();
-            $table->enum('uloga');
+            $table->enum('uloga',['admin','frizer','klijent'])->default('klijent');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('remember_token', 100)->nullable();
 

@@ -15,14 +15,21 @@ class DatabaseSeeder extends Seeder
         $user = \App\Models\User::factory()
             ->count(1)
             ->create([
-                'email' => 'admin@admin.com',
+                'ime'=> 'Nevena',
+                'prezime'=> 'Pesic',
+                'username' => 'nevenapesic',
                 'password' => \Hash::make('admin'),
+                'broj_telefona'=> '0645145578',
+                'uloga'=> 'admin'
             ]);
 
-        $this->call(ObavestenjaSeeder::class);
-        $this->call(RacunSeeder::class);
-        $this->call(TerminSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(TerminSeeder::class);
+        $this->call(ObavestenjaSeeder::class);
         $this->call(UslugaSeeder::class);
+        $this->call(RacunSeeder::class);
+        $this->call(StavkaRacunaSeeder::class);
+        $this->call(TerminUslugaSeeder::class);
+
     }
 }
