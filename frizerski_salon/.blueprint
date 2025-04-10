@@ -1,0 +1,35 @@
+created:
+    - app/Http/Controllers/UserController.php
+    - app/Http/Controllers/UslugaController.php
+    - app/Http/Controllers/TerminController.php
+    - app/Http/Controllers/RacunController.php
+    - app/Http/Controllers/ObavestenjaController.php
+    - tests/Feature/Http/Controllers/UserControllerTest.php
+    - tests/Feature/Http/Controllers/UslugaControllerTest.php
+    - tests/Feature/Http/Controllers/TerminControllerTest.php
+    - tests/Feature/Http/Controllers/RacunControllerTest.php
+    - tests/Feature/Http/Controllers/ObavestenjaControllerTest.php
+    - app/Http/Requests/UserUpdateRequest.php
+    - app/Http/Requests/UslugaStoreRequest.php
+    - app/Http/Requests/UslugaUpdateRequest.php
+    - app/Http/Requests/TerminStoreRequest.php
+    - app/Http/Requests/TerminUpdateRequest.php
+    - app/Http/Requests/RacunStoreRequest.php
+    - resources/views/user/index.blade.php
+    - resources/views/user/show.blade.php
+    - resources/views/user/edit.blade.php
+    - resources/views/usluga/index.blade.php
+    - resources/views/usluga/create.blade.php
+    - resources/views/usluga/show.blade.php
+    - resources/views/usluga/edit.blade.php
+    - resources/views/termin/index.blade.php
+    - resources/views/termin/create.blade.php
+    - resources/views/termin/show.blade.php
+    - resources/views/termin/edit.blade.php
+    - resources/views/racun/index.blade.php
+    - resources/views/racun/create.blade.php
+    - resources/views/racun/show.blade.php
+    - resources/views/obavestenja/index.blade.php
+    - resources/views/obavestenja/show.blade.php
+updated:
+    - routes/web.php

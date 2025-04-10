@@ -25,3 +25,14 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::prefix('/')
     ->middleware('auth')
     ->group(function () {});
+
+
+Route::resource('users', App\Http\Controllers\UserController::class)->except('create', 'store');
+
+Route::resource('uslugas', App\Http\Controllers\UslugaController::class);
+
+Route::resource('termins', App\Http\Controllers\TerminController::class)->except('destroy');
+
+Route::resource('racuns', App\Http\Controllers\RacunController::class)->except('edit', 'update', 'destroy');
+
+Route::resource('obavestenjas', App\Http\Controllers\ObavestenjaController::class)->only('index', 'show');

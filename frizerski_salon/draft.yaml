@@ -1,0 +1,15 @@
+controllers:
+  User:
+    resource: index, show, edit, update, destroy
+  Usluga:
+    resource
+  Termin:
+    resource: index, show, create, store, edit, update
+  Racun:
+    resource: index, show, create, store
+  Obavestenja:
+    resource: index, show
+  
+
+
+  
