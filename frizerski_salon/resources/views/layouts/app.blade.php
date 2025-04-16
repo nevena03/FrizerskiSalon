@@ -11,7 +11,7 @@
         
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
         
         <!-- Styles -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
@@ -26,6 +26,101 @@
 
         
         @livewireStyles
+
+        <style>
+            body{
+                font-family: 'Cinzel';
+                overflow-x: hidden;
+                background-color: #E8EC97;
+            
+            }
+            h1{
+                color: #870F96;
+            }
+            .navbar-nav{
+                font-size: medium;
+            }
+            .nav-item{
+                height: 100%;
+            }
+            .nav-custom-link{
+                margin: 50px;
+            }
+            .nav-custom-link:hover{
+
+                color: #870F96 !important;
+                font-weight: bold;
+                text-decoration: none;
+            }
+            .dropdown:hover{
+
+            color: #870F96 !important;
+            font-weight: bold;
+            text-decoration: none;
+            }
+            .table thead th{
+                border-top: none;
+                border-bottom: none;
+                color: #870F96;
+                font-size: medium;
+
+            }
+            .table thead{
+                border-bottom: 2px solid #790888;
+            }
+            .table tbody td{
+                border-top: 1px solid #790888;
+                color: #000000;
+                
+            }
+            .nav-tabs{
+                border-bottom: solid 2px #790888;
+                padding: 1px;
+            }
+            .nav-tabs .nav-item{
+                border-radius: 10px;
+                background-color: #E8EC97;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+
+            }
+            .nav-tabs .nav-item .nav-link{
+                color: #870F96;
+                border: none;
+            }
+            .nav-tabs .nav-item:hover{
+                background-color: #D9D9D9;
+                
+            
+            }
+            .nav-tabs .nav-item .nav-link:hover{
+                color: #870F96;
+                font-weight: bold;
+                border: none;
+            }
+            .nav-tabs .nav-link.active{
+                background-color: #D9D9D9;
+                color: #870F96;
+                font-weight: bold;
+                border-radius: 10px;
+            }
+            .btn-custom{
+                background-color: #8F2D9C;
+                color: #ECAEF4;
+                border-radius: 8px;
+                font-weight: bold;
+
+
+            }
+            .btn-custom:hover{
+              
+                background-color:rgb(195, 177, 194);
+                color:rgb(112, 0, 126);
+
+            }
+
+        </style>
     </head>
     
     <body>

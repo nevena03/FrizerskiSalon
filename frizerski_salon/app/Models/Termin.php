@@ -23,6 +23,7 @@ class Termin extends Model
 
     protected $casts = [
         'datum' => 'date',
+        'vreme' => 'datetime:H:i:s'
     ];
 
     public function frizer()
@@ -42,7 +43,7 @@ class Termin extends Model
 
     public function obavestenjas()
     {
-        return $this->hasMany(Obavestenja::class);
+        return $this->hasMany(Obavestenja::class)->latest('datum');
     }
 
     public function uslugas()

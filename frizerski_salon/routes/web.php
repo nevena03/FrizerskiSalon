@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TerminController;
+use App\Models\Termin;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +33,21 @@ Route::resource('users', App\Http\Controllers\UserController::class)->except('cr
 
 Route::resource('uslugas', App\Http\Controllers\UslugaController::class);
 
-Route::resource('termins', App\Http\Controllers\TerminController::class)->except('destroy');
+Route::resource('termins', App\Http\Controllers\TerminController::class);
 
 Route::resource('racuns', App\Http\Controllers\RacunController::class)->except('edit', 'update', 'destroy');
 
 Route::resource('obavestenjas', App\Http\Controllers\ObavestenjaController::class)->only('index', 'show');
+
+Route::put('/termins/potvrdi/{termin}', [TerminController::class, 'potvrdi'])->name('termins.potvrdi');
+
+Route::put('/termins/zavrsi/{termin}', [TerminController::class, 'zavrsi'])->name('termins.zavrsi');
+
+Route::put('/termins/propusten/{termin}', [TerminController::class, 'propusten'])->name('termins.propusten');
+
+Route::put('/termins/otkazi/{termin}', [TerminController::class, 'otkazi'])->name('termins.otkazi');
+
+
+
+
+

@@ -49,9 +49,27 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'ime' => ['required', 'string', 'max:255'],
+            'prezime' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255','unique:users'],
+            'broj_telefona' => ['required', 'string', 'size:10','unique:users','regex:/^\d+$/'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ],
+        [
+            //OVDE IDU CUSTOM PORUKE
+            'ime.required' => 'Ime je obavezno polje',
+            'prezime.required' => 'Prezime je obavezno polje',
+            'username.required' => 'Username je obavezno polje',
+            'broj_telefona.required' => 'Broj telefona je obavezno polje',
+            'password.required' => 'Lozinka je obavezno polje',
+            'username.unique' => 'Username je zauzet',
+            'password.min' => 'Lozinka mora imati minimun 8 karaktera',
+            'password.confirmed' => 'Lozinke se ne poklapaju',
+            'broj_telefona.size' => 'Broj telefona mora imati tačno 10 cifara',
+            'broj_telefona.unique' => 'Broj telefona vec postoji',
+            'broj_telefona.regex' => 'Broj telefona mora imati samo cifre'
+
+
         ]);
     }
 
@@ -64,9 +82,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'ime' => $data['ime'],
+            'prezime' => $data['prezime'],
+            'username' => $data['username'],
+            'broj_telefona' => $data['broj_telefona'],
             'password' => Hash::make($data['password']),
+            'uloga' => $data['uloga'] ?? 'klijent'
         ]);
     }
 }
