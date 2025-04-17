@@ -8,19 +8,9 @@ use Illuminate\View\View;
 
 class ObavestenjaController extends Controller
 {
-    public function index(Request $request)
-    {
-        $obavestenjas = Obavestenja::all();
-
-        return view('obavestenja.index', [
-            'obavestenjas' => $obavestenjas,
-        ]);
-    }
-
-    public function show(Request $request, Obavestenja $obavestenja)
-    {
-        return view('obavestenja.show', [
-            'obavestenja' => $obavestenja,
-        ]);
-    }
+   public function destroy(Request $request, Obavestenja $obavestenja)
+   {
+        $obavestenja -> delete();
+        return redirect()->route('termins.index');
+   }
 }

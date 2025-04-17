@@ -48,7 +48,6 @@
 </head>
 <body>
 <div class="container">
-    <h1 style="color: #870F96;" class="text-center display-2 mt-4" >Registracija</h1>
     <div style="height: 70vh;" class="row justify-content-center align-items-center">
         <div style="border:2px solid #790888; background-color: #E8EC97; border-radius:10px" class="col-md-8 p-5 ">
             <form method="POST" action="{{ route('register') }}">

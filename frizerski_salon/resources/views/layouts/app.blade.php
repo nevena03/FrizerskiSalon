@@ -7,7 +7,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
-        <title>FrizerskiSalon</title>
+        <title>Frizerski Salon</title>
         
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -47,8 +47,7 @@
                 margin: 50px;
             }
             .nav-custom-link:hover{
-
-                color: #870F96 !important;
+                color: #870F96;
                 font-weight: bold;
                 text-decoration: none;
             }
@@ -85,6 +84,9 @@
                 align-items: center;
 
             }
+            .nav-custom-link{
+                color: #870F96;
+            }
             .nav-tabs .nav-item .nav-link{
                 color: #870F96;
                 border: none;
@@ -104,6 +106,16 @@
                 color: #870F96;
                 font-weight: bold;
                 border-radius: 10px;
+            }
+            
+            .navbar-nav .nav-item.active{
+                background-color: #870F96;
+                height: 100%;
+                border-radius: 20px;
+            }
+            .navbar-nav .nav-item .nav-custom-link.active{
+                color: #D9D9D9;
+                font-weight: bold;
             }
             .btn-custom{
                 background-color: #8F2D9C;

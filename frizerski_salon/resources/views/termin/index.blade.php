@@ -101,7 +101,7 @@
             <div style="background-color: #D9D9D9;" class="col-3 p-3">
                 <h4 style="color: #790888" class="text-center mt-2 mb-5" >Obaveštenja</h4>
                 @if($obavestenja->isEmpty())
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger font-weight-bold text-center ">
                         Nema obaveštenja!
                     </div>
                 @else
@@ -118,6 +118,13 @@
                         </p>
                         <p style="color:  #000000;" class="text-center" >
                             {{$obavestenje->datum->format('d.m.Y.')}}
+                        </p>
+                        <p>
+                            <form action="{{route('obavestenjas.destroy',['obavestenja'=>$obavestenje])}}" method="POST" class="text-center" >
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger font-weight-bold">Obriši</button>
+                            </form>
                         </p>
                         
                    </div>

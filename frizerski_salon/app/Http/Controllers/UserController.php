@@ -6,16 +6,23 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
+use Laravel\Ui\Presets\React;
+
+
 
 class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::all();
+        $uloga = $request->query('uloga', 'frizer');
+        
+        $users = User::where('uloga',$uloga)->get();
 
         return view('user.index', [
             'users' => $users,
+            'uloga' => $uloga,
         ]);
     }
 
@@ -25,9 +32,10 @@ class UserController extends Controller
             'user' => $user,
         ]);
     }
-
+    
     public function edit(Request $request, User $user)
     {
+    
         return view('user.edit', [
             'user' => $user,
         ]);
@@ -35,17 +43,28 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, User $user)
     {
-        $user->update($request->validated());
 
-        $request->session()->flash('user.id', $user->id);
+        $podaci = $request->only(['ime','prezime','broj_telefona','username']);
 
-        return redirect()->route('users.index');
+        if($request->filled('password'))
+        {
+            if(!Hash::check($request->old_password, $user->password))
+            {
+                return redirect()->route('users.edit', $user)->withErrors(['old_password' => 'Uneta loznika se ne poklapa sa starom!'])->withInput();
+            }
+
+            $podaci['password'] = Hash::make($request->password);
+
+        }
+        $user->update($podaci);
+        return redirect()->route('users.show', $user)->with('success', 'Profil je uspešno ažuriran!');
+    
     }
 
     public function destroy(Request $request, User $user)
     {
         $user->delete();
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success','Uspešno ste obrisali korisnika!');
     }
 }

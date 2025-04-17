@@ -70,7 +70,7 @@
             </div>
             <div class="row justify-content-around">
                 @if(Auth::user()->uloga == 'klijent')
-                    <form action="{{route('termins.otkazi',['termin'=>$termin])}}" method="POST" onsubmit="return confirm('Da li ste sigurni da želite da otažete termin?')">
+                    <form action="{{route('termins.otkazi',['termin'=>$termin])}}" method="POST" onsubmit="return confirm('Da li ste sigurni da želite da otkažete termin?')">
                         @csrf
                         @method('PUT')
                         <button type="submit" class="btn btn-danger mt-4 font-weight-bold">Otkaži</button>

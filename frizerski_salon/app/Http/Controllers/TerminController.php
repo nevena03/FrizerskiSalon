@@ -141,6 +141,14 @@ class TerminController extends Controller
 
         $termin->uslugas()->attach($request->usluge);
 
+        $obavestenje = new Obavestenja();
+
+        $obavestenje -> poruka = 'Novi termin je kreiran!';
+        $obavestenje -> datum = $termin->created_at;
+        $obavestenje -> termin_id = $termin->id;
+        $obavestenje->save();
+
+
         session()->flash('success', 'Zahtev za termin je poslat!');
         return redirect()->route('termins.index');
 
@@ -213,7 +221,13 @@ class TerminController extends Controller
         $termin->status = 'otkazan';
         $termin->save();
 
-        return redirect()->route('termins.index');
+        $obavestenje = new Obavestenja();
+        $obavestenje -> poruka = 'Termin je otkazan!';
+        $obavestenje -> datum = Carbon::now();
+        $obavestenje -> termin_id = $termin->id;
+        $obavestenje ->save();
+
+        return redirect()->route('termins.index')->with('success', 'Termin je otkazan!');
     }
     public function destroy(Termin $termin)
     {
