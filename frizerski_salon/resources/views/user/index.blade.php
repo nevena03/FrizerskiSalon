@@ -2,6 +2,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="row justify-content-end mr-5  mt-3">
+        <a style="font-weight: bold;"  class="btn btn-success" href="{{route('register')}}">Dodaj novog korisika</a>
+    </div>
     <h1 class="text-center" >Svi korisnici</h1>
     <div class="row justify-content-center mt-5">
             <ul class="nav nav-tabs justify-content-center col-9">

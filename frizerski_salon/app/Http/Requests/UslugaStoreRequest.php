@@ -20,7 +20,8 @@ class UslugaStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'usluga' => ['required'],
+            'naziv'=> ['required','string'],
+            'cena'=> ['required','numeric']
         ];
     }
 }

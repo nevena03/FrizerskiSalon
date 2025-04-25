@@ -13,6 +13,9 @@
       <li class="nav-item">
         <a style="color: #870F96" class="nav-custom-link" href="{{route('users.index')}}">Korisnici</a>
       </li>
+      <li class="nav-item">
+        <a style="color: #870F96" class="nav-custom-link" href="{{route('uslugas.index')}}">Usluge</a>
+      </li>
     @endif
   </ul>
 

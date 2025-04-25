@@ -48,10 +48,25 @@
 </head>
 <body>
 <div class="container">
+    <h1 style="color: #870F96;" class="text-center display-2 mt-4" >Registracija</h1>
     <div style="height: 70vh;" class="row justify-content-center align-items-center">
         <div style="border:2px solid #790888; background-color: #E8EC97; border-radius:10px" class="col-md-8 p-5 ">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
+                @if(Auth::check())
+                    @if(Auth::user()->uloga == 'admin')
+                    <div class="form-group row">
+                        <label style="color: #870F96" for="uloga" class="col-form-label col-3 font-weight-bold">
+                            Uloga:
+                        </label>
+                        <select name="uloga" class="col-9">
+                                <option value="frizer">Frizer</option>
+                                <option value="admin">Administrator</option>
+                                <option value="klijent">Klijent</option>
+                        </select>
+                    </div>
+                    @endif
+                @endif
                 <div class="form-group row align-items-center">
                     <label style="color: #870F96" for="ime" class="col-form-label col-3 font-weight-bold">
                         Ime:

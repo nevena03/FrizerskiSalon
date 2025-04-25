@@ -28,7 +28,15 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+        if (auth()->user()->uloga === 'admin')
+        {
+            return route('users.index');
+        }
+
+        return '/home';
+    }
 
     /**
      * Create a new controller instance.
@@ -37,7 +45,14 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware(function($request, $next)
+        {
+            if(auth()->check() && auth()->user()->uloga != 'admin')
+            {
+                return redirect('/home');
+            }
+            return $next($request);
+        });
     }
 
     /**

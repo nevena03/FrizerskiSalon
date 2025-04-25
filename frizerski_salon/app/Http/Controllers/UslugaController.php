@@ -7,6 +7,7 @@ use App\Http\Requests\UslugaUpdateRequest;
 use App\Models\Usluga;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class UslugaController extends Controller
@@ -27,11 +28,11 @@ class UslugaController extends Controller
 
     public function store(UslugaStoreRequest $request)
     {
-        $usluga = Usluga::create($request->validated());
+        $usluga = new Usluga($request->validated());
+        $usluga ->administrator_id = Auth::id();
+        $usluga->save();
 
-        $request->session()->flash('usluga.id', $usluga->id);
-
-        return redirect()->route('uslugas.index');
+        return redirect()->route('uslugas.index')->with('success', 'Uspešno dodata nova usluga!');
     }
 
     public function show(Request $request, Usluga $usluga)
@@ -54,7 +55,7 @@ class UslugaController extends Controller
 
         $request->session()->flash('usluga.id', $usluga->id);
 
-        return redirect()->route('uslugas.index');
+        return redirect()->route('uslugas.index')->with('success', 'Uspešno izmenjena usluga!');
     }
 
     public function destroy(Request $request, Usluga $usluga)
