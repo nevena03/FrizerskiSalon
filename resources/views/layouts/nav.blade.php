@@ -3,7 +3,7 @@
 
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a   class="nav-custom-link" href="{{route('termins.index')}}">Moji termini</a>
+      <a   class="nav-custom-link" href="{{route('termins.index')}}">Termini</a>
     </li>
     @if(Auth::user()->uloga == 'klijent')
       <li class="nav-item">
@@ -15,6 +15,9 @@
       </li>
       <li class="nav-item">
         <a style="color: #870F96" class="nav-custom-link" href="{{route('uslugas.index')}}">Usluge</a>
+      </li>
+       <li class="nav-item">
+        <a style="color: #870F96" class="nav-custom-link" href="{{route('racuns.index')}}">Računi</a>
       </li>
     @endif
   </ul>

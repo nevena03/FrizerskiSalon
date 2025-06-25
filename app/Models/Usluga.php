@@ -22,7 +22,7 @@ class Usluga extends Model
 
     public function racuns()
     {
-        return $this->belongsToMany(Racun::class, 'stavka_racuna');
+        return $this->belongsToMany(Racun::class, 'stavka_racuna')->withPivot('cena');
     }
 
     public function termins()

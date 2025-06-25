@@ -31,6 +31,6 @@ class Racun extends Model
 
     public function uslugas()
     {
-        return $this->belongsToMany(Usluga::class, 'stavka_racuna');
+        return $this->belongsToMany(Usluga::class, 'stavka_racuna')->withPivot('cena');
     }
 }

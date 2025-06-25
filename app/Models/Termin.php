@@ -36,9 +36,9 @@ class Termin extends Model
         return $this->belongsTo(User::class, 'klijent_id');
     }
 
-    public function racuns()
+    public function racun()
     {
-        return $this->hasMany(Racun::class);
+        return $this->hasOne(Racun::class);
     }
 
     public function obavestenjas()

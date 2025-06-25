@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\TerminStoreRequest;
 use App\Http\Requests\TerminUpdateRequest;
 use App\Models\Obavestenja;
 use App\Models\Termin;
 use App\Models\User;
 use App\Models\Usluga;
+use App\Models\Racun;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+
 
 class TerminController extends Controller
 {
@@ -183,7 +186,7 @@ class TerminController extends Controller
 
         $sada = Carbon::now();
 
-        if($sada->diffInMinutes($vreme, false) < 180){
+        if($sada->diffInMinutes($vreme, false) > 180){
             return redirect()->route('termins.show', $termin)->withErrors(['error' => 'Termin mora biti potvrđen minimun tri sata pre njegovog početka!']);
 
         }
@@ -234,6 +237,38 @@ class TerminController extends Controller
         $termin->delete();
 
         return redirect()->route('termins.index')->with('success', 'Termin je obrisan!');
+
+    }
+    public function generisi(Termin $termin)
+    {
+        if($termin->racun)
+        {
+            return redirect()->route('racuns.show', $termin->racun);
+        }
+        $usluge = $termin->uslugas;
+        $ukupna_cena = $usluge -> sum('cena');
+        DB::beginTransaction();
+        try
+        {
+            $racun = Racun::create([
+                'ukupna_cena' => $ukupna_cena,
+                'nacin_placanja' => 'gotovina',
+                'datum_izdavanja' => Carbon::today(),
+                'termin_id' => $termin->id
+            ]);
+            foreach($usluge as $usluga)
+            {
+                $racun->uslugas()->attach($usluga->id,[
+                    'cena' => $usluga->cena
+                ]);
+            }
+            DB::commit();
+            return redirect()->route('racuns.show', $termin->racun)->with('success','Račun je uspešno generisan!');
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->route('termins.show', $termin)->withErrors(['error'=> 'Desila se greška!']);
+        }
 
     }
 

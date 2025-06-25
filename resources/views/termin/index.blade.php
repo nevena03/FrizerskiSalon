@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container-fluid">
-        <h1 class="text-center">Moji termini</h1>
+        <h1 class="text-center">Termini</h1>
         @if(Auth::user()->uloga == 'admin' || Auth::user()->uloga == 'frizer' )
             <div class="row justify-content-center mt-5">
             <ul class="nav nav-tabs justify-content-center col-9">

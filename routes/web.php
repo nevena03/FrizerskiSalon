@@ -46,3 +46,5 @@ Route::put('/termins/zavrsi/{termin}', [TerminController::class, 'zavrsi'])->nam
 Route::put('/termins/propusten/{termin}', [TerminController::class, 'propusten'])->name('termins.propusten');
 
 Route::put('/termins/otkazi/{termin}', [TerminController::class, 'otkazi'])->name('termins.otkazi');
+
+Route::put('/termins/generisi_racun/{termin}', [TerminController::class, 'generisi'])->name('termins.generisi');

@@ -96,7 +96,11 @@
 
                         </form>
                     @elseif($termin->status == 'zavrsen')
-                        <a href="">Generiši račun</a>
+                        <form action="{{route('termins.generisi',['termin'=>$termin])}}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button class="btn btn-custom mt-4 font-weight-bold">Generiši račun</button>
+                        </form>
                     @endif
                 @endif
 
