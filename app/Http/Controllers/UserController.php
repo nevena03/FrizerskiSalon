@@ -28,6 +28,10 @@ class UserController extends Controller
 
     public function show(Request $request, User $user)
     {
+        if (auth()->id() != $user->id)
+        {
+            abort(403, 'Nemate dozvolu da pristupite ovoj stranici.');
+        }
         return view('user.show', [
             'user' => $user,
         ]);
@@ -35,7 +39,10 @@ class UserController extends Controller
     
     public function edit(Request $request, User $user)
     {
-    
+        if (auth()->id() != $user->id)
+        {
+            abort(403, 'Nemate dozvolu da pristupite ovoj stranici.');
+        }
         return view('user.edit', [
             'user' => $user,
         ]);
@@ -43,6 +50,10 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, User $user)
     {
+        if (auth()->id() != $user->id)
+        {
+            abort(403, 'Nemate dozvolu da pristupite ovoj stranici.');
+        }
 
         $podaci = $request->only(['ime','prezime','broj_telefona','username']);
 
