@@ -96,11 +96,22 @@
 
                         </form>
                     @elseif($termin->status == 'zavrsen')
+                        @if($termin->racun)
+                        <a href="{{route('racuns.show', ['racun' =>$termin->racun])}}" class="btn btn-custom mt-4 font-weight-bold">Prikaži račun</a>
+                        @else
                         <form action="{{route('termins.generisi',['termin'=>$termin])}}" method="POST">
                             @csrf
                             @method('PUT')
-                            <button class="btn btn-custom mt-4 font-weight-bold">Generiši račun</button>
+                            <div class="form-group mt-3">
+                                <label  style="color: #870F96"  for="datum" class="form-check-label font-weight-bold" >Način plaćanja:</label>
+                                <select name="nacin_placanja" >
+                                    <option value="Gotovina">Gotovina</option>
+                                    <option value="Kartica">Kartica</option>
+                                </select>
+                             </div>
+                            <button class="btn btn-custom mt-1 font-weight-bold">Generiši račun</button>
                         </form>
+                        @endif
                     @endif
                 @endif
 

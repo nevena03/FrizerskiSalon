@@ -117,8 +117,7 @@ class TerminController extends Controller
         $vreme = $request->input('vreme');
         $frizer = $request->input('frizer_id');
 
-        $vreme = Carbon::createFromFormat('H:i:s', $vreme);
-
+        
         $zakazan_termin = Termin::where('datum', $datum)
             ->where('frizer_id', $frizer)
             ->where('status', 'potvrdjen')
@@ -127,7 +126,7 @@ class TerminController extends Controller
         if($zakazan_termin)
         {
             return redirect()->route('termins.create')
-            ->withErrors(['vreme' => 'Frizer već ima zakazan termin u to vremes!'])
+            ->withErrors(['vreme' => 'Frizer već ima zakazan termin u to vreme!'])
             ->withInput();
 
         }
@@ -239,7 +238,7 @@ class TerminController extends Controller
         return redirect()->route('termins.index')->with('success', 'Termin je obrisan!');
 
     }
-    public function generisi(Termin $termin)
+    public function generisi(Termin $termin, Request $request)
     {
         if($termin->racun)
         {
@@ -252,7 +251,7 @@ class TerminController extends Controller
         {
             $racun = Racun::create([
                 'ukupna_cena' => $ukupna_cena,
-                'nacin_placanja' => 'gotovina',
+                'nacin_placanja' => $request->nacin_placanja,
                 'datum_izdavanja' => Carbon::today(),
                 'termin_id' => $termin->id
             ]);
@@ -263,7 +262,7 @@ class TerminController extends Controller
                 ]);
             }
             DB::commit();
-            return redirect()->route('racuns.show', $termin->racun)->with('success','Račun je uspešno generisan!');
+            return redirect()->route('racuns.show', $racun)->with('success','Račun je uspešno generisan!');
         }
         catch(\Exception $e){
             DB::rollBack();

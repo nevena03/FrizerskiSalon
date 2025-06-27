@@ -23,9 +23,9 @@ class TerminFactory extends Factory
     public function definition(): array
     {
         return [
-            'datum' => $this->faker->date(),
-            'vreme' => $this->faker->time(),
-            'status' => '',
+            'datum' => $this->faker->date('Y-m-d'),
+            'vreme' => $this->faker->time('H:i:s'),
+            'status' => $this->faker->randomElement(['nepotvrdjen','potvrdjen','zavrsen','propusten','otkazan']),
             'frizer_id' => \App\Models\User::factory(),
             'klijent_id' => \App\Models\User::factory(),
         ];

@@ -24,7 +24,7 @@ class RacunFactory extends Factory
     {
         return [
             'ukupna_cena' => $this->faker->randomNumber(1),
-            'nacin_placanja' => $this->faker->text(255),
+            'nacin_placanja' => $this->faker->randomElement(['Gotovina','Kartica']),
             'datum_izdavanja' => $this->faker->date(),
             'termin_id' => \App\Models\Termin::factory(),
         ];
