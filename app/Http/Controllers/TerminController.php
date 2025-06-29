@@ -179,15 +179,16 @@ class TerminController extends Controller
 
         return redirect()->route('termins.index');
     }
-    public function potvrdi(Termin $termin)
+   public function potvrdi(Termin $termin)
     {
-        $vreme = Carbon::parse($termin->datum)->setTimeFromTimeString($termin->vreme);
+        $datum = Carbon::parse($termin->datum)->format('Y-m-d');
+        $vreme = Carbon::parse($termin->vreme)->format('H:i:s');
+        
+        $zakazano = Carbon::createFromFormat('Y-m-d H:i:s', "$datum $vreme");
+        $sada = Carbon::now('Europe/Belgrade');
 
-        $sada = Carbon::now();
-
-        if($sada->diffInMinutes($vreme, false) > 180){
+        if($zakazano->lessThan($sada->addHours(3))){
             return redirect()->route('termins.show', $termin)->withErrors(['error' => 'Termin mora biti potvrđen minimun tri sata pre njegovog početka!']);
-
         }
         
         $termin->update([
@@ -211,11 +212,13 @@ class TerminController extends Controller
     }
     public function otkazi(Termin $termin)
     {
-        $vreme = Carbon::parse($termin->datum)->setTimeFromTimeString($termin->vreme);
+        $datum = Carbon::parse($termin->datum)->format('Y-m-d');
+        $vreme = Carbon::parse($termin->vreme)->format('H:i:s');
+        
+        $zakazano = Carbon::createFromFormat('Y-m-d H:i:s', "$datum $vreme");
+        $sada = Carbon::now('Europe/Belgrade');
 
-        $sada = Carbon::now();
-
-        if($sada->diffInMinutes($vreme, false) < 180){
+        if($zakazano->lessThan($sada->addHours(3))){
             return redirect()->route('termins.show', $termin)->withErrors(['error' => 'Termin se ne može otkazati tri sata pre njegovog početka!']);
 
         }

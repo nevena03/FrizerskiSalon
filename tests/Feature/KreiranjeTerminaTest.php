@@ -38,30 +38,33 @@ class KreiranjeTerminaTest extends TestCase
             'vreme' => '10:00:00',
         ]);
     }
+
     /** @test */
-    public function test_ne_moze_se_zakazati_termin_ako_je_vreme_zauzeto()
+    public function test_klijent_otkazuje_termin()
     {
         $klijent = User::factory()->create(['uloga' => 'klijent']);
         $frizer = User::factory()->create(['uloga' => 'frizer']);
-        $usluga = Usluga::factory()->create();
 
-        Termin::factory()->create([
-            'datum' => now()->addDays(1)->format('Y-m-d'),
-            'vreme' => '10:00:00',
+        $termin = Termin::factory()->create([
+            'klijent_id' => $klijent->id,
             'frizer_id' => $frizer->id,
+            'datum' => now()->addDays(1)->format('Y-m-d'),
+            'vreme' => now()->addHours(4)->format('H:i:s'),
             'status' => 'potvrdjen',
         ]);
 
         $response = $this->actingAs($klijent)
-        ->from(route('termins.create'))
-        ->post(route('termins.store'), [
-        'datum' => now()->addDays(1)->format('Y-m-d'),
-        'vreme' => '10:00:00',
-        'frizer_id' => $frizer->id,
-        'usluge' => [$usluga->id],
-    ]);
+            ->put(route('termins.otkazi', $termin));
 
-    $response->assertRedirect(route('termins.create'));
-    $response->assertSessionHasErrors('vreme');
+        $response->assertRedirect();
+        $response->assertSessionHas('success');
+
+          $this->assertDatabaseHas('termins', [
+            'id' => $termin->id,
+            'status' => 'otkazan',
+        ]);
+
+
+
     }
 }
